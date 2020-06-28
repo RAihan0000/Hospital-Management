@@ -1,0 +1,127 @@
+{% extends 'index.html' %}
+
+{% block head %}
+<title>Patient Registration</title>
+{% endblock %}
+{% block body %}
+<div class="patient-registration">
+     <form action="/register" method="POST">
+          <h2 class="text-center">Patient Registration</h2>
+          <div class="form">
+               <div class="form-group" id="id">
+                    <div class="lable">
+                         <p for="user" class="label">Patient SSN ID <span class="require">*</span></p>
+                    </div>
+                    <div class="input">
+                         <input type="text" name="id" id="id" class="input-field">
+                    </div>
+               </div>
+               <div class="form-group" id="name">
+                    <div class="lable">
+                         <p for="user" class="label">Patient Name <span class="require">*</span></p>
+                    </div>
+                    <div class="input">
+                         <input type="text" name="name" id="name" class="input-field">
+                    </div>
+               </div>
+               <div class="form-group" id="age">
+                    <div class="lable">
+                         <p for="user" class="label">Patient Age <span class="require">*</span></p>
+                    </div>
+                    <div class="input">
+                         <input type="text" name="age" id="age" class="input-field">
+                    </div>
+               </div>
+               <div class="form-group" id="date">
+                    <div class="lable">
+                         <p for="user" class="label">Date of Admission <span class="require">*</span></p>
+                    </div>
+                    <div class="input">
+                         <input type="text" name="date" id="date" class="input-field">
+                    </div>
+               </div>
+               <div class="form-group" id="bed">
+                    <div class="lable">
+                         <p for="bed" class="label">Type of bed <span class="require">*</span></p>
+                    </div>
+                    <div class="input">
+                         <select name="bed" id="bed" class="bed-select">
+                              <option class="option">select</option>
+                              {% for bed in beds %}
+                                   <option value="{{bed}}" class="option">{{bed}}</option>
+                              {% endfor %}
+                         </select>
+                    </div>
+               </div>
+               <div class="form-group" id="address">
+                    <div class="lable">
+                         <p for="address" class="label" style="margin-left: 2rem;">Address <span
+                                   class="require">*</span></p>
+                    </div>
+                    <div class="input">
+                         <textarea name="address" id="address" cols="30" rows="5" style="margin-top: 1rem;"></textarea>
+                    </div>
+               </div>
+               <div class="form-group" id="state">
+                    <div class="lable">
+                         <p for="state" class="label">State <span class="require">*</span></p>
+                    </div>
+                    <div class="input">
+                         <select name="state" id="state" class="state-select">
+                              <option class="option">select</option>
+                              {% for each in states %}
+                                   <option value="{{each}}" class="option">{{each}}</option>
+                              {% endfor %}
+                         </select>
+                    </div>
+               </div>
+               <div class="form-group" id="city">
+                    <div class="lable">
+                         <p for="city" class="label">City <span class="require">*</span></p>
+                    </div>
+                    <div class="input">
+                         <select name="city" id="city" class="city-select">
+                              <option class="option">select</option>
+                              {% for each in cities %}
+                              <option value="{{each}}" class="option">{{each}}</option>
+                              {% endfor %}
+                         </select>
+                    </div>
+               </div>
+               <div class="btn-group">
+                    <div class="submit-button">
+                         <input type="button" value="Submit" class="submit-btn" onclick="checkSnnId()">
+                    </div>
+                    <div class="reset-button">
+                         <input type="button" value="Reset" class="reset-btn" onclick="Reset()">
+                    </div>
+               </div>
+          </div>
+     </form>
+</div>
+<script>
+     function checkSnnId() {
+          var ssnId = document.getElementById("ssn_id").value;
+          var name = document.getElementById("name").value; 
+          var age = document.getElementById("age").value ;
+          var date = document.getElementById("date").value ;
+          var address = document.getElementById("address").value ;
+          if(ssnId.length !== 9){
+               alert("SSN ID should be 9 characters");
+          }
+          if(name.length > 0 && age.length > 0 && date.length > 0 && address.length > 0){
+               document.querySelector(".alert_message").classList.remove("none");
+          }
+          
+     }
+     function Reset() {
+
+          document.getElementById("ssn_id").value = "";
+          document.getElementById("name").value = "";
+          document.getElementById("age").value = "";
+          document.getElementById("date").value = "";
+          document.getElementById("address").value = "";
+          
+     }
+</script>
+{% endblock %}

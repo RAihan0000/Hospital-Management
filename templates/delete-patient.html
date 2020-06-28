@@ -1,0 +1,178 @@
+{% extends 'index.html' %}
+
+{% block head %}
+<title>Delete Patient</title>
+{% endblock %}
+
+{% block body %}
+<form action="" method="post">
+     <div class="patient-registration">
+          <h2 class="text-center">Delete Patient</h2>
+          <input type="submit" value="Get" class="get">
+          {% if session['display'] == 'no' %}
+          <div class="form">
+               <div class="form-group" id="id">
+                    <div class="lable">
+                         <p for="user" class="label">Patient SSN ID <span class="require">*</span></p>
+                    </div>
+                    <div class="input">
+                         <input type="text" name="id" id="id" class="input-field">
+                    </div>
+               </div>
+               <div class="form-group" id="name">
+                    <div class="lable">
+                         <p for="user" class="label">Patient Name </p>
+                    </div>
+                    <div class="input">
+                         <input type="text" name="name" id="name" class="input-field">
+                    </div>
+               </div>
+               <div class="form-group" id="age">
+                    <div class="lable">
+                         <p for="user" class="label">Patient Age </p>
+                    </div>
+                    <div class="input">
+                         <input type="text" name="age" id="age" class="input-field">
+                    </div>
+               </div>
+               <div class="form-group" id="date">
+                    <div class="lable">
+                         <p for="user" class="label">Date of Admission </p>
+                    </div>
+                    <div class="input">
+                         <input type="text" name="date" id="date" class="input-field">
+                    </div>
+               </div>
+               <div class="form-group" id="bed">
+                    <div class="lable">
+                         <p for="bed" class="label">Type of bed </p>
+                    </div>
+                    <div class="input">
+                         <select name="bed" id="bed" class="bed-select">
+                            <option class="option">select</option>
+                            
+                         </select>
+                    </div>
+               </div>
+               <div class="form-group" id="address">
+                    <div class="lable">
+                         <p for="address" class="label" style="margin-left: 2rem;">Address </p>
+                    </div>
+                    <div class="input">
+                         <textarea name="address" id="address" cols="30" rows="5" style="margin-top: 1rem;"></textarea>
+                    </div>
+               </div>
+               <div class="form-group" id="state">
+                    <div class="lable">
+                         <p for="state" class="label">State </p>
+                    </div>
+                    <div class="input">
+                         <select name="state" id="state" class="state-select">
+                            <option class="option">select</option>
+                            
+                         </select>
+                    </div>
+               </div>
+               <div class="form-group" id="city">
+                    <div class="lable">
+                         <p for="city" class="label">City </span></p>
+                    </div>
+                    <div class="input">
+                         <select name="city" id="city" class="city-select">
+                            <option class="option">select</option>
+                         </select>
+                    </div>
+               </div>
+               <div class="btn-group">
+                    <div class="submit-button">
+                         <input type="button" value="Update" class="submit-btn">
+                    </div>
+               </div>
+          </div>
+            {% else %}
+            <div class="form">
+                <div class="form-group" id="id">
+                     <div class="lable">
+                          <p for="user" class="label">Patient SSN ID <span class="require">*</span></p>
+                     </div>
+                     <div class="input">
+                          <input type="text" name="id" id="id" class="input-field" value="{{patient.ssn}}">
+                     </div>
+                </div>
+                <div class="form-group" id="name">
+                     <div class="lable">
+                          <p for="user" class="label">Patient Name </p>
+                     </div>
+                     <div class="input">
+                          <input type="text" name="name" id="name" class="input-field" value="{{patient.name}}">
+                     </div>
+                </div>
+                <div class="form-group" id="age">
+                     <div class="lable">
+                          <p for="user" class="label">Patient Age </p>
+                     </div>
+                     <div class="input">
+                          <input type="text" name="age" id="age" class="input-field" value="{{patient.age}}">
+                     </div>
+                </div>
+                <div class="form-group" id="date">
+                     <div class="lable">
+                          <p for="user" class="label">Date of Admission </p>
+                     </div>
+                     <div class="input">
+                          <input type="text" name="date" id="date" class="input-field"
+                               value="{{ patient.date_admitted.strftime('%Y-%m-%d')}}">
+                     </div>
+                </div>
+                <div class="form-group" id="bed">
+                     <div class="lable">
+                          <p for="bed" class="label">Type of bed </p>
+                     </div>
+                     <div class="input">
+                          <select name="bed" id="bed" class="bed-select">
+                               <option value="{{patient.bed_type }}" class="option">{{patient.bed_type}}</option>
+                          </select>
+                     </div>
+                </div>
+                <div class="form-group" id="address">
+                     <div class="lable">
+                          <p for="address" class="label" style="margin-left: 2rem;">Address </p>
+                     </div>
+                     <div class="input">
+                          <textarea name="address" id="address" value="{{patient.address}}" cols="30" rows="5"
+                               style="margin-top: 1rem;">{{patient.address}}</textarea>
+                     </div>
+                </div>
+                <div class="form-group" id="state">
+                     <div class="lable">
+                          <p for="state" class="label">State </p>
+                     </div>
+                     <div class="input">
+                          <select name="state" id="state" class="state-select">
+                               <option value="{{patient.state}}" class="option">{{patient.state}}</option>
+                          </select>
+                     </div>
+                </div>
+                <div class="form-group" id="city">
+                     <div class="lable">
+                          <p for="city" class="label">City </span></p>
+                     </div>
+                     <div class="input">
+                          <select name="city" id="city" class="city-select">
+                               <option value="{{patient.city}}">{{patient.city}}</option>
+                          </select>
+                     </div>
+                </div>
+                <div class="btn-group">
+                     <div class="submit-button">
+                          <a href="/delete/{{patient.ssn}}"><input type="button" value="Delete" class="submit-btn"></a>
+                     </div>
+                </div>
+           </div>
+            {% endif %}
+     </div>
+     
+</form>
+<br><br>
+
+{% endblock %}

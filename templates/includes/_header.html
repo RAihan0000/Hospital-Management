@@ -1,0 +1,28 @@
+<header>
+    <main>
+         <h1 class="main-head">ABC Hospital Management System</h1>
+
+         {% if session.logged_in %}
+         <div class="filters">
+            <div class="patient">
+                 <select name="patient" id="patient" class="patient-select">
+                      <option value="" class="option">Patient</option>
+                      <a href="/register"> <option value="Patient Registration" class="option"> 
+                        Patient Registration</option></a>
+                 </select>
+            </div>
+            <div class="pharmacy">
+                 <select name="pharmacy" id="pharmacy" class="pharmacy-select">
+                      <option value="" class="option">Pharmacy</option>
+                 </select>
+            </div>
+            <div class="diagnostics">
+                 <select name="diagnostics" id="diagnostics" class="diagnostics-select">
+                      <option value="" class="option">Diagnostics</option>
+                 </select>
+            </div>
+       </div>
+         {% endif %}
+         <hr/>
+    </main>
+</header>

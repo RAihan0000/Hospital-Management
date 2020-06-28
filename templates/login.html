@@ -1,0 +1,34 @@
+{% extends 'index.html' %}
+
+{% block head %}
+<title>Login</title>
+{% endblock %}
+
+{% block body %}
+<form action="" method="post">
+    <div class="login-card">
+        <h2 class="text-center">Login</h2>
+        <div class="form">
+            <div class="form-group" id="user">
+                <div class="lable">
+                    <p for="user" class="label-text">User</p>
+                </div>
+                <div class="input">
+                    <input type="text" name="username" id="username" class="input-field" placeholder="user name">
+                </div>
+            </div>
+            <div class="form-group" id="password">
+                <div class="lable">
+                    <p for="user" class="label-text">Password</p>
+                </div>
+                <div class="input">
+                    <input type="password" name="password" id="password" class="input-field" placeholder="password">
+                </div>
+            </div>
+            <div class="login-button">
+                <input type="submit" value="Login" class="login-btn">
+            </div>
+        </div>
+    </div>
+    </form>
+{% endblock %}

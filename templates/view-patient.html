@@ -1,0 +1,152 @@
+{% include 'index.html' %}
+
+{% block head %}
+<title>View Patient</title>
+{% endblock %}
+
+{% block body %}
+<form action="" method="post">
+     <div class="patient-registration">
+          <h2 class="text-center">View Patient</h2>
+          <input type="submit" value="View" class="get">
+          {% if session['display'] == 'no'%}
+          <div class="form">
+               <div class="form-group" id="id">
+                    <div class="lable">
+                         <p for="user" class="label">Patient SSN ID <span class="require">*</span></p>
+                    </div>
+                    <div class="input">
+                         <input type="text" name="id" id="id" class="input-field">
+                    </div>
+               </div>
+               <div class="form-group" id="name">
+                    <div class="lable">
+                         <p for="user" class="label">Patient Name </p>
+                    </div>
+                    <div class="input">
+                         <input type="text" name="name" id="name" class="input-field">
+                    </div>
+               </div>
+               <div class="form-group" id="age">
+                    <div class="lable">
+                         <p for="user" class="label">Patient Age </p>
+                    </div>
+                    <div class="input">
+                         <input type="text" name="age" id="age" class="input-field">
+                    </div>
+               </div>
+               <div class="form-group" id="date">
+                    <div class="lable">
+                         <p for="user" class="label">Date of Admission </p>
+                    </div>
+                    <div class="input">
+                         <input type="text" name="date" id="date" class="input-field">
+                    </div>
+               </div>
+               <div class="form-group" id="bed">
+                    <div class="lable">
+                         <p for="bed" class="label">Type of bed </p>
+                    </div>
+                    <div class="input">
+                         <input type="text" name="bed" id="bed" class="input-field">
+                    </div>
+               </div>
+               <div class="form-group" id="address">
+                    <div class="lable">
+                         <p for="address" class="label" style="margin-left: 2rem;">Address </p>
+                    </div>
+                    <div class="input">
+                         <textarea name="address" id="address" cols="30" rows="5" style="margin-top: 1rem;"></textarea>
+                    </div>
+               </div>
+               <div class="form-group" id="state">
+                    <div class="lable">
+                         <p for="state" class="label">State </p>
+                    </div>
+                    <div class="input">
+                         <input type="text" name="state" id="state" class="input-field">
+                    </div>
+               </div>
+               <div class="form-group" id="city">
+                    <div class="lable">
+                         <p for="city" class="label">City </p>
+                    </div>
+                    <div class="input">
+                         <input type="text" name="city" id="city" class="input-field">
+                    </div>
+               </div>
+          </div>
+          {% else %}
+          <div class="form">
+               <div class="form-group" id="id">
+                    <div class="lable">
+                         <p for="user" class="label">Patient SSN ID <span class="require">*</span></p>
+                    </div>
+                    <div class="input">
+                         <input type="text" value="{{patient.ssn}}" name="id" id="id" class="input-field">
+                    </div>
+               </div>
+               <div class="form-group" id="name">
+                    <div class="lable">
+                         <p for="user" class="label">Patient Name </p>
+                    </div>
+                    <div class="input">
+                         <input type="text" value="{{patient.name}}" name="name" id="name" class="input-field">
+                    </div>
+               </div>
+               <div class="form-group" id="age">
+                    <div class="lable">
+                         <p for="user" class="label">Patient Age </p>
+                    </div>
+                    <div class="input">
+                         <input type="text" value="{{patient.age}}" name="age" id="age" class="input-field">
+                    </div>
+               </div>
+               <div class="form-group" id="date">
+                    <div class="lable">
+                         <p for="user" class="label">Date of Admission </p>
+                    </div>
+                    <div class="input">
+                         <input type="text" value="{{ patient.date_admitted.strftime('%Y-%m-%d')}}" name="date"
+                              id="date" class="input-field">
+                    </div>
+               </div>
+               <div class="form-group" id="bed">
+                    <div class="lable">
+                         <p for="bed" class="label">Type of bed </p>
+                    </div>
+                    <div class="input">
+                         <input type="text" value="{{patient.bed_type}}" name="bed" id="bed" class="input-field">
+                    </div>
+               </div>
+               <div class="form-group" id="address">
+                    <div class="lable">
+                         <p for="address" class="label" style="margin-left: 2rem;">Address </p>
+                    </div>
+                    <div class="input">
+                         <textarea name="address" value="{{patient.address}}" id="address" cols="30" rows="5"
+                              style="margin-top: 1rem;">{{patient.address}}</textarea>
+                    </div>
+               </div>
+               <div class="form-group" id="state">
+                    <div class="lable">
+                         <p for="state" class="label">State </p>
+                    </div>
+                    <div class="input">
+                         <input type="text" value="{{patient.state}}" name="state" id="state" class="input-field">
+                    </div>
+               </div>
+               <div class="form-group" id="city">
+                    <div class="lable">
+                         <p for="city" class="label">City </p>
+                    </div>
+                    <div class="input">
+                         <input type="text" value="{{patient.city}}" name="city" id="city" class="input-field">
+                    </div>
+               </div>
+          </div>
+          {% endif %}
+     </div>
+</form>
+<br><br>
+{% endblock %}

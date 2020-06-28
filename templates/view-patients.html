@@ -1,0 +1,34 @@
+{% extends 'index.html' %}
+
+{% block head %}
+<title>All Patients</title>
+{% endblock %}
+
+{% block body %}
+     <div class="patient-details">
+          <h2 class="text-center" >View Patients</h2>
+          <div class="details-table">
+               <table>
+                    <tr>
+                    <th>Patient ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Address</th>
+                    <th>DOJ</th>
+                    <th>Type of Room</th>
+                    </tr>
+                    {% for each in all %}
+                    <tr>
+                    <td>{{each.ssn}}</td>
+                    <td>{{each.name}}</td>
+                    <td>{{each.age}}</td>
+                    <td>{{each.address}}</td>
+                    <td>{{each.date_admitted.strftime("%Y-%m-%d")}}</td>
+                    <td>{{each.bed_type}}</td>
+                    </tr>
+                    {% endfor %}
+                  </table>
+                  
+          </div>
+     </div>
+{% endblock %}
