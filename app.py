@@ -6,7 +6,7 @@ from functools import wraps
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///hospital.db'
 db = SQLAlchemy(app)
-
+app.secret_key = 'This ia the secret key lsdkhlsd 78998'
 
 class userstore(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -460,5 +460,4 @@ def billing():
 
 
 if __name__ == '__main__':
-    app.secret_key = '123456'
     app.run(debug=True)
