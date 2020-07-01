@@ -1,0 +1,82 @@
+{% extends 'index.html' %}
+{% block head %}
+<title>Add Medicines</title>
+{% endblock %}
+{% block body %}
+<h2 class="text-center">Add Diagnostics</h2>
+{% if session['display']=='no' %}
+
+<div class="medicine-details">  
+          <div class="details-table">
+               <table>
+                    <tr>
+                    <th>Name of the test</th>
+                    <th>Amount</th>
+                    </tr>
+                    {% if dlen != 0%}
+                    {% for each in diaglist %}
+                    <tr>
+                        <td>{{each.test}}</td>
+                        <td>Rs.{{each.price}}</td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                    
+                    
+                  </table>
+                  
+          </div>
+          <input type="button" class="get" value="Add" id="add" onclick="formOpen()">
+          <div class="backdrop none" onclick="formClose()"></div>
+          <div class="show-form none">
+            <form action="" method="post">
+               <div class="form">
+                   
+                   </div>
+                   <div class="form-group" id="bed">
+                    <div class="lable">
+                         <p for="test" class="label">Diagnostic Type </p>
+                    </div>
+                    <div class="input">
+                         <select name="test" id="test" class="bed-select">
+                              <option class="option">select</option>
+                              {% for each in diags %}
+                                   <option value="{{each}}" class="option">{{each}}</option>
+                              {% endfor %}
+                         </select>
+                    </div>
+               </div>
+                   <div class="btn-group">
+                    <div class="submit-button">
+                        <input type="submit" value="Add" class="submit-btn" onclick="formClose()">
+                    </div>
+                </div>
+               </div>
+           </form>
+          </div>
+     </div>
+<div class="btn-group">
+                         <div class="submit-button">
+                            <a href="/updatediags/{{id}}"><input type="button" value="Update" class="submit-btn"></a>   
+                         </div>
+</div>	
+
+{% endif %}
+<style>
+main {
+    margin-bottom: 1rem;
+}
+ </style>
+
+ <script type="javascript">
+  const formClose = () => {
+    document.querySelector(".backdrop").classList.add("none");
+    document.querySelector(".show-form").classList.add("none");
+   }
+  const formOpen = () =>{
+    document.querySelector(".backdrop").classList.remove("none");
+    document.querySelector(".show-form").classList.remove("none");
+  }
+ </script>
+
+{% endblock %}	  

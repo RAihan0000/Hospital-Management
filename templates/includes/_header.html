@@ -1,3 +1,4 @@
+<html>
 <header>
     <main>
          <h1 class="main-head">ABC Hospital Management System</h1>
@@ -5,24 +6,113 @@
          {% if session.logged_in %}
          <div class="filters">
             <div class="patient">
-                 <select name="patient" id="patient" class="patient-select">
-                      <option value="" class="option">Patient</option>
-                      <a href="/register"> <option value="Patient Registration" class="option"> 
-                        Patient Registration</option></a>
-                 </select>
+               <div class="dropdown">
+                    <button onclick="patientdd()" class="dropbtn">Patient</button>
+                    <div id="myDropdown" class="dropdown-content">
+                      <a href="/register">Patient Registration</a>
+                      <a href="/update-patient">Update Patient</a>
+                      <a href="/delete-patient">Delete Patient</a>
+                      <a href="/viewall">All Patients</a>
+                      <a href="/viewone">Search Patient</a>
+                      <a href="/billing">Patient Billing</a>
+                    </div>
+               </div>
             </div>
             <div class="pharmacy">
-                 <select name="pharmacy" id="pharmacy" class="pharmacy-select">
-                      <option value="" class="option">Pharmacy</option>
-                 </select>
+              <div class="dropdown">
+                   <button onclick="pharmacydd()" class="dropbtn">Pharmacy</button>
+                   <div id="phDropdown" class="dropdown-content">
+                     <a href="/patmeds">Issue Medicines</a>
+                   </div>
+              </div>
+           </div>
+           <div class="diagnostics">
+            <div class="dropdown">
+                 <button onclick="diagnosticsdd()" class="dropbtn">Patient</button>
+                 <div id="dgDropdown" class="dropdown-content">
+                   <a href="/patdiags">Add Diagnostics</a>
+                 </div>
             </div>
-            <div class="diagnostics">
-                 <select name="diagnostics" id="diagnostics" class="diagnostics-select">
-                      <option value="" class="option">Diagnostics</option>
-                 </select>
+         </div>
+            <div class="pharmacy">
+              <a href="/logout"><input type="button" value="Logout"></a>
             </div>
        </div>
          {% endif %}
          <hr/>
     </main>
 </header>
+<style>
+     /* Dropdown Button */
+.dropbtn {
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #2980B9;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+</style>
+<script>
+     function patientdd() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+function pharmacydd() {
+  document.getElementById("phDropdown").classList.toggle("show");
+}
+
+function diagnosticsdd() {
+  document.getElementById("dgDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+</html>

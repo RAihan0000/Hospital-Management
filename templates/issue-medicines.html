@@ -1,0 +1,88 @@
+{% extends 'index.html' %}
+{% block head %}
+<title>Add Medicines</title>
+{% endblock %}
+{% block body %}
+<h2 class="text-center">Add Medicines</h2>
+{% if session['display']=='no' %}
+
+<div class="medicine-details">  
+          <div class="details-table">
+               <table>
+                    <tr>
+                    <th>Medicine</th>
+                    <th>Quantity</th>
+                    <th>Rate</th>
+                    <th>Amount</th>
+ 
+                    </tr>
+                    {% if lmed !=0 %}
+                    {% for each in medlist %}
+                    <tr>
+                        <td>{{each.med}}</td>
+                        <td>{{each.qty}}</td>
+                        <td>Rs.{{each.price}}</td>
+                        <td>Rs.{{each.amount}}</td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                    
+                  </table>
+                  
+          </div>
+          <input type="button" class="get" value="Add" id="add" onclick="formOpen()">
+          <div class="backdrop none" onclick="formClose()"></div>
+          <div class="show-form none">
+            <form action="" method="post">
+               <div class="form">
+                   <div class="form-group" id="meds">
+                       <div class="lable">
+                           <p for="user" class="label">Medicine Name </p>
+                       </div>
+                       <div class="input">
+                           <input type="text" name="meds" id="meds"  class="input-field">
+                       </div>
+                       
+                   </div>
+                   <div class="form-group" id = "qty">
+                    <div class="lable">
+                         <p for="user" class="label">Quantity </p>
+                     </div>
+                     <div class="input">
+                         <input type="text"  name="qty" id="qty" class="input-field">
+                     </div>
+                   </div>
+                   <div class="btn-group">
+                    <div class="submit-button">
+                        <input type="submit" value="Add" class="submit-btn" onclick="formClose()">
+                    </div>
+                </div>
+               </div>
+           </form>
+          </div>
+     </div>
+<div class="btn-group">
+                         <div class="submit-button">
+                            <a href="/updatemeds/{{id}}"><input type="button" value="Update" class="submit-btn"></a>   
+                         </div>
+</div>	
+
+{% endif %}
+<style>
+main {
+    margin-bottom: 1rem;
+}
+ </style>
+
+ <script type="javascript">
+  const formClose = () => {
+    document.querySelector(".backdrop").classList.add("none");
+    document.querySelector(".show-form").classList.add("none");
+   }
+  const formOpen = () =>{
+    document.querySelector(".backdrop").classList.remove("none");
+    document.querySelector(".show-form").classList.remove("none");
+  }
+ </script>
+
+{% endblock %}	  

@@ -5,7 +5,7 @@
 {% endblock %}
 {% block body %}
 <div class="patient-registration">
-     <form action="/register" method="POST">
+     <form action="" method="POST">
           <h2 class="text-center">Patient Registration</h2>
           <div class="form">
                <div class="form-group" id="id">
@@ -13,7 +13,7 @@
                          <p for="user" class="label">Patient SSN ID <span class="require">*</span></p>
                     </div>
                     <div class="input">
-                         <input type="text" name="id" id="id" class="input-field">
+                         <input type="text" name="id" id="id" placeholder="9 digit unique id" class="input-field">
                     </div>
                </div>
                <div class="form-group" id="name">
@@ -21,7 +21,7 @@
                          <p for="user" class="label">Patient Name <span class="require">*</span></p>
                     </div>
                     <div class="input">
-                         <input type="text" name="name" id="name" class="input-field">
+                         <input type="text" name="name" id="name"  class="input-field">
                     </div>
                </div>
                <div class="form-group" id="age">
@@ -37,7 +37,7 @@
                          <p for="user" class="label">Date of Admission <span class="require">*</span></p>
                     </div>
                     <div class="input">
-                         <input type="text" name="date" id="date" class="input-field">
+                         <input type="text" name="date" id="date" placeholder="format: yyyy-mm-dd" class="input-field">
                     </div>
                </div>
                <div class="form-group" id="bed">
@@ -90,38 +90,13 @@
                </div>
                <div class="btn-group">
                     <div class="submit-button">
-                         <input type="button" value="Submit" class="submit-btn" onclick="checkSnnId()">
+                         <input type="submit" value="Submit" class="submit-btn">
                     </div>
                     <div class="reset-button">
-                         <input type="button" value="Reset" class="reset-btn" onclick="Reset()">
+                         <input type="button" value="Reset" class="reset-btn" >
                     </div>
                </div>
           </div>
      </form>
-</div>
-<script>
-     function checkSnnId() {
-          var ssnId = document.getElementById("ssn_id").value;
-          var name = document.getElementById("name").value; 
-          var age = document.getElementById("age").value ;
-          var date = document.getElementById("date").value ;
-          var address = document.getElementById("address").value ;
-          if(ssnId.length !== 9){
-               alert("SSN ID should be 9 characters");
-          }
-          if(name.length > 0 && age.length > 0 && date.length > 0 && address.length > 0){
-               document.querySelector(".alert_message").classList.remove("none");
-          }
-          
-     }
-     function Reset() {
-
-          document.getElementById("ssn_id").value = "";
-          document.getElementById("name").value = "";
-          document.getElementById("age").value = "";
-          document.getElementById("date").value = "";
-          document.getElementById("address").value = "";
-          
-     }
-</script>
+</div> 
 {% endblock %}

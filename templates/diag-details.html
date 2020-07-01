@@ -1,0 +1,93 @@
+{% extends 'index.html' %}
+{% block head %}
+<title>Patient Details</title>
+{% endblock %}
+
+{% block body %}
+<style>
+    main {
+        margin-bottom: 1rem;
+    }
+</style>
+<h2 class="text-center">Diagnostics</h2>
+{% if session['display'] == 'no' %}
+<form action="" method="post">
+    <div class="form">
+        <div class="form-group" id="id">
+            <div class="lable">
+                <p for="user" class="label">Enter Patient Id </p>
+            </div>
+            <div class="input">
+                <input type="text" name="id" id="id" placeholder="9 digit unique id" class="input-field">
+                <input type="submit" value="Get Details" class="submit-btn">
+            </div>
+        </div>
+    </div>
+</form>
+{% else %}
+<form action="" method="post">
+    <div class="form">
+        <div class="form-group" id="id">
+            <div class="lable">
+                <p for="user" class="label">Enter Patient Id </p>
+            </div>
+            <div class="input">
+                <input type="text" name="id" id="id" value="{{patient.ssn}}" class="input-field">
+                <a href="/patdiags"><input type="button" value="Clear" class="submit-btn"></a>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="patient-details">
+
+    <div class="details-table">
+        <table>
+            <tr>
+                <th>Patient ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Address</th>
+                <th>DOJ</th>
+                <th>Type of Room</th>
+            </tr>
+            <tr>
+                <td>{{patient.ssn}}</td>
+                <td>{{patient.name}}</td>
+                <td>{{patient.age}}</td>
+                <td>{{patient.address}}</td>
+                <td>{{ patient.date_admitted.strftime('%Y-%m-%d')}}</td>
+                <td>{{patient.bed_type}}</td>
+            </tr>
+
+        </table>
+
+    </div>
+</div>
+<div class="medicine-details">
+    <h2 class="text-center">Diagnostics Conducted</h2>
+    <div class="details-table">
+        <table>
+            <tr>
+                <th>Name of the test</th>
+                <th>Amount</th>
+            </tr>
+            {% if ld != 0 %}
+            {% for each in dcon %}
+            <tr>
+                <td>{{each.test}}</td>
+                <td>Rs.{{each.price}}</td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+
+        </table>
+
+    </div>
+</div>
+<div class="btn-group">
+    <div class="submit-button">
+        <a href="/adddiags/{{patient.ssn}}"><input type="button" value="Add Diagnostics" class="submit-btn"></a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
