@@ -82,8 +82,8 @@ def is_logged_in(f):
     return wrap
 
 beds = ['General Ward', 'Semi Sharing', 'Single']
-states = ['AP', 'Telangana']
-cities = ['Kadapa', 'Kurnool']
+states = ['Andhra Pradesh', 'Karnataka', 'Telangana', 'Tamilnadu']
+cities = ['Banglore', 'Chennai','Coimbatore','Hyderabad','Kadapa', 'Kurnool','Madurai', 'Mysore','Tirupathi', 'Vellore','Vijayawada','Vizag','Warngal']
 diags = list()
 ds = Diagnostics.query.all()
 for each in ds:
@@ -206,7 +206,7 @@ def update(id):
 @app.route('/viewall')
 @is_logged_in
 def allpatients():
-    all = Patient.query.all()
+    all = Patient.query.filter_by(status='active').all()
     return render_template('view-patients.html', all=all)
 
 
@@ -215,13 +215,13 @@ def allpatients():
 def update_patient():
     if request.method == 'POST':
         id = request.form['id']
-        patient = Patient.query.filter_by(ssn=id).all()
+        patient = Patient.query.filter_by(ssn=id,status='active').all()
         if len(patient) == 1:
             patient = Patient.query.filter_by(ssn=id).all()[0]
             session['display'] = 'yes'
             return render_template('update-patient.html', patient=patient, beds=beds, states=states, cities=cities)
         else:
-            flash('No Patient with given id is found', 'danger')
+            flash('No Patient with given id is found or have been discharged', 'danger')
             return render_template('update-patient.html')
     else:
         session['display'] = 'no'
@@ -283,7 +283,7 @@ def viewone():
 def patmeds():
     if request.method == 'POST':
         id = request.form['id']
-        patient = Patient.query.filter_by(ssn=id).all()
+        patient = Patient.query.filter_by(ssn=id,status='active').all()
         if len(patient) == 1:
             patient = Patient.query.filter_by(ssn=id).all()[0]
             meds = Issuemeds.query.filter_by(ssn=id).all()
@@ -291,7 +291,7 @@ def patmeds():
             session['display'] = 'yes'
             return render_template('med-details.html', patient=patient, meds = meds, dmeds = dmeds)
         else:
-            flash('Patient with given id does not exist','danger')
+            flash('Patient with given id does not exist or has been discharged','danger')
             return redirect('patmeds')
     else:
         session['display'] = 'no'
@@ -333,6 +333,8 @@ def upadtemeds(id):
     if len(medlist) != 0:
         for each in medlist:
             db.session.add(Issuemeds(ssn = each.ssn, med =each.med, quantity = each.qty, price  = each.price, amount = each.amount))
+            meds = Meds.query.filter_by(name = each.med).all()[0]
+            meds.quantity = meds.quantity - int(each.qty)
             db.session.commit()
         medlist.clear()
         flash('Medicines have been issued to the Patient', 'success')
@@ -350,7 +352,7 @@ def upadtemeds(id):
 def patdiags():
     if request.method == 'POST':
         id = request.form['id']
-        patient = Patient.query.filter_by(ssn=id).all()
+        patient = Patient.query.filter_by(ssn=id,status='active').all()
         if len(patient) == 1:
             patient = Patient.query.filter_by(ssn=id).all()[0]
             did = PatientDiag.query.filter_by(ssn=id).all()
@@ -363,7 +365,7 @@ def patdiags():
             return render_template('diag-details.html', patient=patient, dcon = dcon, ld = ld)
         else:
             dcon.clear()
-            flash('Patient with given id does not exist','danger')
+            flash('Patient with given id does not exist or discharged','danger')
             return redirect('patdiags')
     else:
         session['display'] = 'no'
@@ -418,7 +420,7 @@ def billing():
         id = request.form['id']
         days = int(request.form['days'])
         dcon.clear()
-        patient = Patient.query.filter_by(ssn=id).all()
+        patient = Patient.query.filter_by(ssn=id,status='active').all()
         if len(patient) == 1 :
             patient = Patient.query.filter_by(ssn=id).all()[0]
             if patient.bed_type == 'General Ward':
@@ -451,12 +453,21 @@ def billing():
                      meds = meds, dmeds = dmeds, pharmacy = pharmacy, dcon = dcon, ld = ld, 
                      diagbill = diagbill, total = total)
         else:
-            flash('Patient with given id not found','danger')
+            flash('Patient with given id not found or has been discharged','danger')
             return redirect(url_for('billing'))
     else:
         dcon.clear()
         session['display'] = 'no'
         return render_template('final-billing.html')
+
+@app.route('/discharge/<int:id>')
+@is_logged_in
+def discharge(id):
+    patient = Patient.query.filter_by(ssn=id).all()[0]
+    patient.status = 'Discharged'
+    db.session.commit()
+    flash('Billing is done and the Patient is ready to be discharged','success')
+    return redirect(url_for('register'))
 
 
 if __name__ == '__main__':

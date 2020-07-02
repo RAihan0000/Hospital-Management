@@ -8,7 +8,6 @@
 <form action="" method="post">
      <div class="patient-registration">
           <h2 class="text-center">View Patient</h2>
-          <input type="submit" value="View" class="get">
           {% if session['display'] == 'no'%}
           <div class="form">
                <div class="form-group" id="id">
@@ -73,6 +72,14 @@
                     </div>
                     <div class="input">
                          <input type="text" name="city" id="city" class="input-field">
+                    </div>
+               </div>
+               <div class="form-group" id="status">
+                    <div class="lable">
+                         <p for="status" class="label">Status </p>
+                    </div>
+                    <div class="input">
+                         <input type="text" name="status" id="status" class="input-field">
                     </div>
                </div>
           </div>
@@ -142,6 +149,14 @@
                     </div>
                     <div class="input">
                          <input type="text" value="{{patient.city}}" name="city" id="city" class="input-field">
+                    </div>
+               </div>
+               <div class="form-group" id="status">
+                    <div class="lable">
+                         <p for="status" class="label">Status </p>
+                    </div>
+                    <div class="input">
+                         <input type="text" value="{{patient.status}}" name="status" id="status" class="input-field">
                     </div>
                </div>
           </div>

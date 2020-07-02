@@ -30,9 +30,6 @@
                   </table>
                   
           </div>
-          <input type="button" class="get" value="Add" id="add" onclick="formOpen()">
-          <div class="backdrop none" onclick="formClose()"></div>
-          <div class="show-form none">
             <form action="" method="post">
                <div class="form">
                    <div class="form-group" id="meds">
@@ -54,13 +51,12 @@
                    </div>
                    <div class="btn-group">
                     <div class="submit-button">
-                        <input type="submit" value="Add" class="submit-btn" onclick="formClose()">
+                        <input type="submit" value="Add" class="submit-btn">
                     </div>
                 </div>
                </div>
-           </form>
-          </div>
-     </div>
+           </form>      
+</div>
 <div class="btn-group">
                          <div class="submit-button">
                             <a href="/updatemeds/{{id}}"><input type="button" value="Update" class="submit-btn"></a>   
@@ -73,16 +69,5 @@ main {
     margin-bottom: 1rem;
 }
  </style>
-
- <script type="javascript">
-  const formClose = () => {
-    document.querySelector(".backdrop").classList.add("none");
-    document.querySelector(".show-form").classList.add("none");
-   }
-  const formOpen = () =>{
-    document.querySelector(".backdrop").classList.remove("none");
-    document.querySelector(".show-form").classList.remove("none");
-  }
- </script>
 
 {% endblock %}	  
